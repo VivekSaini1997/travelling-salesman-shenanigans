@@ -18,7 +18,7 @@ def main(args):
 	# draw the map
 	screen_resolution = (1280, 720)
 	pts = generate_random_points(num_points, (10, screen_resolution[0] - 10), (10, screen_resolution[1] - 10))
-	greedy_map = tsp_greedy.greedy_tsp(pts, screen_resolution)
+	greedy_map = tsp_greedy.tsp_greedy(pts, screen_resolution)
 
 	# keep map open until user presses enter
 	# THIS IS DEFINITELY A WIP

@@ -9,20 +9,18 @@ import time
 from tsp_map import *
 
 # felt cute <3 might multi-start later
-class greedy_tsp(tsp_map):
-	"""docstring for greedy_tsp"""
-	def __init__(self, pts, screen_res = None, start_idx = None):
-		super(greedy_tsp, self).__init__(pts, screen_res)
-		# an array of all the visited points
-		self.visited = np.zeros(len(pts))
-		if start_idx is None:
-			start_idx = 0
-		self.path = np.array([start_idx])
-		# an array of the returned path, starts off with just the start
-		self.visited[start_idx] = 1
-		# generate and draw the greedy solution
-		self.generate_solution()
-		self.draw_solution()
+class tsp_greedy(tsp_map):
+	"""docstring for tsp_greedy"""
+	def __init__(self, pts, screen_res = None, start_idx = None, parent = False):
+		super(tsp_greedy, self).__init__(pts, screen_res)
+		# if this class isn't constucted from a child class, do the regular init
+		# otherwise the child class will handle it
+		if parent == False:
+			if start_idx is None:
+				start_idx = 0
+			# generate and draw the greedy solution
+			self.path, self.cost = self.generate_solution(start_idx)
+			self.draw_solution()
 
 	# given the index of a point in particular, get the closest unvisited point
 	def get_next_destination(self, src_idx):
@@ -39,16 +37,32 @@ class greedy_tsp(tsp_map):
 		return best_idx, best_dist
 
 	# generates a greedy solution using the starting index provided
-	def generate_solution(self):
+	# returns the path and the cost of said path in that order
+	def generate_solution(self, start_idx):
 		# set the initial point to be the starting index, i.e. the first vertex in the path
-		prev_pt = self.path[0]
+		prev_pt = start_idx
 		# set the initial cost to zero
-		self.cost = 0
+		cost = 0
+		# allocate an array for the path, set it to be empty except for the first entry which is the 
+		# starting point and create a counter to denote the last element accessed
+		path = np.empty(len(self.pts)).astype(int)
+		path[0] = start_idx
+		counter = 1
+		# set a visited array to be all zeros except for the start index
+		self.visited = np.zeros(len(self.pts))
+		self.visited[start_idx] = 1
 		# while the solution path doesn't contain all of the verticies, generate the next vertex
 		# using the nearest valid one and continue
-		while len(self.path) < len(self.pts):
+		while counter < len(self.pts):
+			# get the next point
 			next_pt, edge_cost = self.get_next_destination(prev_pt)
+			# mark it visited
 			self.visited[next_pt] = 1
-			self.path = np.append(self.path, next_pt)
-			self.cost += edge_cost
+			# update the path and the cost
+			path[counter] = next_pt
+			cost += edge_cost
+			counter += 1
+			# move to the next vertex
 			prev_pt = next_pt
+		# return the cost, might be useful for a multistart
+		return path, cost

@@ -73,6 +73,8 @@ class tsp_map(object):
 		# ok nvm about the vertex, that's handled in the parent class
 		for path_index in range(len(self.path)):
 			# then draw the line, if it is the last vertex, draw a line back to the start 
+			print self.path
+			print path_index
 			line = g.Line(self.pts[self.path[path_index]], self.pts[self.path[(path_index + 1) % len(self.path)]])
 			line.draw(self.window)
 			# this is WIP but we sleep because it ain't real shit (makes things look prettier)
