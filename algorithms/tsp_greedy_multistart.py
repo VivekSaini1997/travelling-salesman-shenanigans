@@ -14,7 +14,20 @@ class tsp_greedy_multistart(tsp_greedy):
 	def __init__(self, pts, screen_res = None,):
 		# let greedy know it IS the father (this is a child class of greedy)
 		super(tsp_greedy_multistart, self).__init__(pts=pts, screen_res=screen_res, parent=True)
+		# do the multistart and draw the best solution
+		self.multi_start()
+		self.draw_solution()
 
+	# generates all of the solutions for all of the possible start indicies
+	# then picks the best one
 	def multi_start(self):
-		pass
+		# the initial cost should be infinite
+		self.cost = float("inf")
+		# generate solutions, if the cost is better, it is the new solution
+		for start_idx in range(len(self.pts)):
+			path, cost = self.generate_solution(start_idx)
+			if cost < self.cost:
+				self.cost = cost
+				self.path = path
 
+		return
