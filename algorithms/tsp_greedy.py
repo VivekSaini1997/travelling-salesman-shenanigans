@@ -64,5 +64,7 @@ class tsp_greedy(tsp_map):
 			counter += 1
 			# move to the next vertex
 			prev_pt = next_pt
+		# account for the last edge from the last point to the first point
+		cost += self.distances[path[0]][path[-1]]
 		# return the cost, might be useful for a multistart
 		return path, cost
