@@ -28,7 +28,9 @@ def get_circular_range(arr, a, b):
 	if a > b:
 		return np.concatenate((arr[a:], arr[:b])) 
 	else:
-		return  np.array(list(arr[a:b]))
+		# this is done so the original arr is not mutated
+		# it can lead to frustration if it is 
+		return np.array(list(arr[a:b]))
 
 # takes in a numpy array and two points, reverses their order in the path, 
 # and places them back in the path
@@ -42,19 +44,14 @@ def swap_and_reverse(arr, a, b):
 	# get the subarray and reverse it
 	subarray = get_circular_range(_arr, a, b)
 	subarray = np.flip(subarray, 0)
-	print subarray, a, b
 	# now replace the indicies between a and b with the reversed subarray
 	# different logic depending on whether or not a is smaller than b
 	# basically the range differs
 	if a < b:
 		for k in range(abs(b-a)):
-			print k
 			_arr[(a + k) % len(_arr)] = subarray[k]
-			print _arr
 	else:
 		for k in range(len(arr) - abs(b-a)):
-			print k
 			_arr[(a + k) % len(_arr)] = subarray[k]
-			print _arr
 	# return the array
 	return _arr

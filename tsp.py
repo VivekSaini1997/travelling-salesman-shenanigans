@@ -20,15 +20,15 @@ def main(args):
 	# draw the map
 	screen_resolution = (1280, 720)
 	pts = generate_random_points(num_points, (10, screen_resolution[0] - 10), (10, screen_resolution[1] - 10))
-	#greedy_map = tsp_greedy.tsp_greedy(pts, screen_resolution)
-	#multi_map = tsp_greedy_multistart.tsp_greedy_multistart(pts, screen_resolution)
-	two_opt_map = tsp_2_opt.tsp_2_opt(pts, screen_resolution, 5)
+	greedy_map = tsp_greedy.tsp_greedy(pts, screen_resolution)
+	multi_map = tsp_greedy_multistart.tsp_greedy_multistart(pts, screen_resolution)
+	two_opt_map = tsp_2_opt.tsp_2_opt(pts, screen_resolution, 15)
 
 	# keep map open until user presses enter
 	# THIS IS DEFINITELY A WIP
 	print 'This is the generated map, press enter to exit'
-	#print 'The cost of the greedy path is {}'.format(greedy_map.cost)
-	#print 'The cost of the multistart path is {}'.format(multi_map.cost)
+	print 'The cost of the greedy path is {}'.format(greedy_map.cost)
+	print 'The cost of the multistart path is {}'.format(multi_map.cost)
 	print 'The cost of the 2-opt path is {}'.format(two_opt_map.cost)
 	esc  = raw_input()
 	return

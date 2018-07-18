@@ -37,7 +37,6 @@ class tsp_2_opt(tsp_map):
 		a = np.random.randint(0, len(self.path))
 		b = np.random.randint(0, len(self.path))
 		p_path = swap_and_reverse(self.path, a, b)
-		time.sleep(1)
 		# get the potential cost
 		p_cost = self.get_path_cost(p_path)
 		# if that cost is lower than the current path's cost, change the path
