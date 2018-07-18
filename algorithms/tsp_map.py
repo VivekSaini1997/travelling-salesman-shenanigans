@@ -14,7 +14,7 @@ class tsp_map(object):
 	# sets up the map to have verticies based on the input
 	# as well as the screen height and width and draws it 
 	# if the resolution parameters are passed in
-	def __init__(self, pts, screen_res=None):
+	def __init__(self, pts, screen_res = None):
 		self.pts = pts
 		self.form_adj_mat()
 		# the path for the class and the cost of it
@@ -56,15 +56,15 @@ class tsp_map(object):
 			circ.setFill('blue')
 			circ.draw(self.window)
 
-	# get the cost of the optimal path using the adjacency matrix
-	def get_path_cost(self):
-		# make sure you don't have a cost from before
-		self.cost = 0
+	# get the cost of any path of the map using the adjacency matrix
+	def get_path_cost(self, path):
+		# initialize the cost to zero
+		cost = 0
 		# go through each edge and add its cost
-		for dst_index in range(len(self.path)):
-			self.cost += self.distances[self.path[dst_idx]][self.path[(dst_idx + 1) % len(self.path)]]
+		for dst_index in range(len(path)):
+			cost += self.distances[path[dst_index]] [path[(dst_index + 1) % len(path)]]
 		# return that cost
-		return self.cost
+		return cost
 
 	# actually draws out the solution given the path
 	def draw_solution(self):
