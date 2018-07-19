@@ -19,6 +19,8 @@ class tsp_sa(tsp_2_opt):
 		# in range 0 to 1, 0 becomes 2-opt, 1 allows for always swapping
 		# initially, values in between allow for more or less randomness
 		initial_temp = 0.8
+		# using an exponential model, k is a paremeter instead
+		k = -4 * math.log(10)
 		# this is the loop equivalent to 2opt
 		# pass in shrinking values of temp to simulate annealing that vary with 
 		# the remaining time
@@ -27,8 +29,9 @@ class tsp_sa(tsp_2_opt):
 		while curr_time - start_time < self.algo_time:
 			# the temperature calculation, it's linear for now
 			# slightly innacurate but that's ok
-			temp = 1 - curr_time/self.algo_time
-			temp *= initial_temp
+			temp = (curr_time - start_time)/self.algo_time
+			# jk its exponential with a slight bias factor so the temperature goes to "zero"
+			temp = math.exp(k * temp) - 0.01
 			# the actual simulated annealing
 			self.simulate_annealing(temp)
 			# update the current time so you know to exit
