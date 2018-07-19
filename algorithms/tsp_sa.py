@@ -15,6 +15,10 @@ class tsp_sa(tsp_2_opt):
 	# called sa_time because two_opt time doesn't make much sense
 	def __init__(self, pts, screen_res, sa_time = 30):
 		super(tsp_sa, self).__init__(pts, screen_res, sa_time, True)
+		# set an initial temperature for the system,
+		# in range 0 to 1, 0 becomes 2-opt, 1 allows for always swapping
+		# initially, values in between allow for more or less randomness
+		initial_temp = 0.8
 		# this is the loop equivalent to 2opt
 		# pass in shrinking values of temp to simulate annealing that vary with 
 		# the remaining time
@@ -24,15 +28,12 @@ class tsp_sa(tsp_2_opt):
 			# the temperature calculation, it's linear for now
 			# slightly innacurate but that's ok
 			temp = 1 - curr_time/self.algo_time
+			temp *= initial_temp
+			# the actual simulated annealing
 			self.simulate_annealing(temp)
 			# update the current time so you know to exit
 			curr_time = float(time.clock())
 
-		# do some good old 2-opting for a third of the time
-		two_opt_time = self.algo_time/3
-		start_time = float(time.clock())
-		while float(time.clock()) - start_time < two_opt_time:
-			self.do_opt()
 		# finally draw the solution
 		self.draw_solution()
 

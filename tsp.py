@@ -23,8 +23,8 @@ def main(args):
 	pts = generate_random_points(num_points, (10, screen_resolution[0] - 10), (10, screen_resolution[1] - 10))
 	greedy_map = tsp_greedy.tsp_greedy(pts, screen_resolution)
 	multi_map = tsp_greedy_multistart.tsp_greedy_multistart(pts, screen_resolution)
-	two_opt_map = tsp_2_opt.tsp_2_opt(pts, screen_resolution, 60)
-	sa_map = tsp_sa.tsp_sa(pts, screen_resolution, 60)
+	two_opt_map = tsp_2_opt.tsp_2_opt(pts, screen_resolution)
+	sa_map = tsp_sa.tsp_sa(pts, screen_resolution)
 
 	# keep map open until user presses enter
 	# THIS IS DEFINITELY A WIP
