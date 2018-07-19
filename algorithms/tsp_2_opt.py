@@ -10,23 +10,26 @@ from tsp_map import *
 # the class responsible for an algorithm which randomly 2-opts
 class tsp_2_opt(tsp_map):
 	"""docstring for tsp_2-opt"""
-	def __init__(self, pts, screen_res, two_opt_time = 30):
+	def __init__(self, pts, screen_res, two_opt_time = 30, parent = False):
 		super(tsp_2_opt, self).__init__(pts, screen_res)
 		# the time to 2opt for
 		# this function becomes much more powerful in a performant language 
-		self.two_opt_time = two_opt_time
+		self.algo_time = two_opt_time
 		# generate a random solution, this is a WIP
 		# i suppose going in order is random enough considering the points
 		# are generated randomly
 		self.path = np.array(range(len(pts)))
 		# get a starting benchmark for the cost to be improved upon
 		self.cost = self.get_path_cost(self.path)
-		# time.clock fetches the current time in seconds?
-		# so the following does do_opt for time seconds that i know for sure
-		start_time = float(time.clock())
-		while float(time.clock()) - start_time < self.two_opt_time:
-			self.do_opt()
-		self.draw_solution()
+		# only do the following if the class is not a parent class
+		# i.e don't do it if you wanna do simulated annealing
+		if parent == False:
+			# time.clock fetches the current time in seconds?
+			# so the following does do_opt for time seconds that i know for sure
+			start_time = float(time.clock())
+			while float(time.clock()) - start_time < self.algo_time:
+				self.do_opt()
+			self.draw_solution()
 
 
 	# does the two opt swap and possible change if the computed cost of the path is lower
