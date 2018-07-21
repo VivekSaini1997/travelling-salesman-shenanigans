@@ -55,3 +55,33 @@ def swap_and_reverse(arr, a, b):
 			_arr[(a + k) % len(_arr)] = subarray[k]
 	# return the array
 	return _arr
+
+# generates the random points and prints them to a .csv file
+# also generates the number of points printed to the file
+# assumes filename does not have an extension
+# also generates a file in the same directory 
+def generate_random_points_to_file(num, xrange_, yrange_, filename):
+	# get the random points
+	pts = generate_random_points(num, xrange_, yrange_)
+	# then print them to the file
+	file = open(filename + ".csv", 'w')
+	file.write("{}\n".format(num))
+	for point in pts:
+		file.write("{},{},\n".format(point.x, point.y))
+	file.close()
+
+# grabs points from a text file
+# to be used to test algorithms on static inputs
+def get_points_from_txt(filename):
+	file = open(filename, 'r')
+	num = int(file.readline())
+	# initialize the array we wish to return
+	arr = np.array([g.Point(0,0) for k in range(num)])
+	count = 0 
+	# for each of the lines, parse them and store them in the array
+	for line in file:
+		arr[count] = g.Point(line.split(',')[0], line.split(',')[1]) 
+		count += 1
+	# close the file and return the array
+	file.close()
+	return arr
