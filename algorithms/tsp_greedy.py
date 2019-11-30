@@ -6,7 +6,7 @@ import graphics as g
 import numpy as np
 import math
 import time
-from tsp_map import *
+from .tsp_map import *
 
 # felt cute <3 might multi-start later
 class tsp_greedy(tsp_map):

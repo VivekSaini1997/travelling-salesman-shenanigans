@@ -7,7 +7,7 @@ import numpy as np
 import math
 import time
 import random
-from tsp_map import *
+from .tsp_map import *
 
 # function to get the x value of a pt index tuple
 def get_x(pt_tuple):

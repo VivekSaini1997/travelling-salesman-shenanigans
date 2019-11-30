@@ -6,7 +6,7 @@ import graphics as g
 import numpy as np
 import math
 import time
-from tsp_greedy import *
+from .tsp_greedy import *
 
 # it's time to multistart i guess lol
 class tsp_greedy_multistart(tsp_greedy):

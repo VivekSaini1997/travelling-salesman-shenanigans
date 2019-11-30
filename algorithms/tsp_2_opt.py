@@ -5,7 +5,7 @@ import numpy as np
 import math
 import time
 import random
-from tsp_map import *
+from .tsp_map import *
 
 # the class responsible for an algorithm which randomly 2-opts
 class tsp_2_opt(tsp_map):

@@ -2,14 +2,18 @@
 what it does is it generates a circle around the midpoint of all the points such that half of the points 
 lie within it and half the points lie outside, then it generates two simple polygons from the points on either side,
 then it tries to connects the two together by removing an edge on both polygons and connecting the two paths together
-only god knows hwo good the path will be but it is efficient (only O(n^2) i believe)'''
+only god knows hwo good the path will be but it is efficient (only O(n^2) i believe)
+
+ideally i shouldn't find a midpoint circle, but rather a circle that best fits the data and use that to segregate the 
+paths, that might be something done in the future. doing it that way however does lower performance
+'''
 
 import graphics as g
 import numpy as np
 import math
 import time
 import random
-from tsp_map import *
+from .tsp_map import *
 
 # called tsp_circle because the main focal point of the algorithm is a circle
 class tsp_circle(tsp_map):

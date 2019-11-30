@@ -5,7 +5,7 @@ import graphics as g
 import numpy as np
 import math
 import time
-from tsp_util import *
+from .tsp_util import *
 
 # this object is used to manage the TSP map
 class tsp_map(object):
@@ -21,7 +21,7 @@ class tsp_map(object):
 		# the path variable stores indicies not actual points and is 
 		# for the actual algo to deal with
 		self.cost = 0
-		self.path = None
+		self.path = list()
 		if screen_res is not None:
 			screen_width = screen_res[0]
 			screen_height = screen_res[1]
@@ -72,7 +72,7 @@ class tsp_map(object):
 		# each vertex
 		# ok nvm about the vertex, that's handled in the parent class
 		for path_index in range(len(self.path)):
-			print path_index
+			print(path_index)
 			# then draw the line, if it is the last vertex, draw a line back to the start 
 			line = g.Line(self.pts[self.path[path_index]], self.pts[self.path[(path_index + 1) % len(self.path)]])
 			line.draw(self.window)

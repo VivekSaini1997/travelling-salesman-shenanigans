@@ -7,7 +7,7 @@ import numpy as np
 import math
 import time
 import random
-from tsp_2_opt import *
+from .tsp_2_opt import *
 
 # called tsp_sa as the sa stands for simulated annealing
 class tsp_sa(tsp_2_opt):
