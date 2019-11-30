@@ -27,21 +27,27 @@ def main(args):
 	# from a file apparently
 	pts = get_points_from_txt('points.csv')
 
-	circle_map = tsp_circle.tsp_circle(pts, screen_resolution)
-	# b_map = tsp_bitonic.tsp_bitonic(pts, screen_resolution)
-	# greedy_map = tsp_greedy.tsp_greedy(pts, screen_resolution)
-	# multi_map = tsp_greedy_multistart.tsp_greedy_multistart(pts, screen_resolution)
-	# two_opt_map = tsp_2_opt.tsp_2_opt(pts, screen_resolution)
-	# sa_map = tsp_sa.tsp_sa(pts, screen_resolution)
-
+	# a slightly nicer interface to actually select between the algorithms
+	# TODO: add a UI to handle user input of map types
+	map_type = 'multistart'
+	# a dictionary storing all of the algorithms as callables
+	map_type_dict = {
+		'circle': tsp_circle.tsp_circle,
+		# 'bitonic': tsp_bitonic.tsp_bitonic,
+		'greedy': tsp_greedy.tsp_greedy,
+		'multistart': tsp_greedy_multistart.tsp_greedy_multistart,
+		'2-opt': tsp_2_opt.tsp_2_opt,
+		'simulated annealing': tsp_sa.tsp_sa
+	}
+	# now get the proper algorithm given the map_type
+	if map_type in map_type_dict:
+		map_algo = map_type_dict.get(map_type)(pts, screen_resolution)
+	else:
+		print('Invalid map selected')
+		return
 	# keep map open until user presses enter
 	# THIS IS DEFINITELY A WIP
-	# print 'This is the generated map, press enter to exit'
-	# print 'The cost of the greedy path is {}'.format(greedy_map.cost)
-	# print 'The cost of the multistart path is {}'.format(multi_map.cost)
-	# print 'The cost of the 2-opt path is {}'.format(two_opt_map.cost)
-	# print 'The cost of the simulated annealing path is {}'.format(sa_map.cost)
-	print ('The cost of the circle path is {}'.format(circle_map.cost))
+	print ('The cost of the {} path is {}'.format(map_type, map_algo.cost))
 	esc  = input()
 	return
 
