@@ -9,6 +9,7 @@ import algorithms.tsp_greedy_multistart as tsp_greedy_multistart
 import algorithms.tsp_2_opt as tsp_2_opt
 import algorithms.tsp_sa as tsp_sa
 import algorithms.tsp_circle as tsp_circle
+import algorithms.tsp_giftwrap as tsp_giftwrap
 # import algorithms.tsp_bitonic as tsp_bitonic
 
 
@@ -29,7 +30,7 @@ def main(args):
 
 	# a slightly nicer interface to actually select between the algorithms
 	# TODO: add a UI to handle user input of map types
-	map_type = 'multistart'
+	map_type = 'giftwrap'
 	# a dictionary storing all of the algorithms as callables
 	map_type_dict = {
 		'circle': tsp_circle.tsp_circle,
@@ -37,7 +38,8 @@ def main(args):
 		'greedy': tsp_greedy.tsp_greedy,
 		'multistart': tsp_greedy_multistart.tsp_greedy_multistart,
 		'2-opt': tsp_2_opt.tsp_2_opt,
-		'simulated annealing': tsp_sa.tsp_sa
+		'simulated annealing': tsp_sa.tsp_sa,
+		'giftwrap': tsp_giftwrap.tsp_giftwrap
 	}
 	# now get the proper algorithm given the map_type
 	if map_type in map_type_dict:
